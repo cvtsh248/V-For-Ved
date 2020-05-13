@@ -25,7 +25,7 @@ class vee(pygame.sprite.Sprite):
         self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
-    def updatePosition(l, r){
+    def updatePosition(l, r):
         last = ''
         if l == True:
             last = 'l'
@@ -47,7 +47,7 @@ class vee(pygame.sprite.Sprite):
                 self.index = 0
             self.image=self.images_idle[self.index]
         #ADD IMAGE FLIPPING pygame.transform.flip(self.image, True, False)
-    }
+    
     def interact(self, name):
         phrase = self.phrases_spoken[random.randint(0,len(self.phrases_spoken)-1)]
         try:
