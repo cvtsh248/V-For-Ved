@@ -1,2 +1,2 @@
 # V-For-Ved
-Simulator
+A simulator of a person only known to man as the VEE.
