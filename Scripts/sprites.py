@@ -3,7 +3,7 @@ import math
 import pygame, sys
 from pygame.locals import *
 
-#Every important character will have its own class for logic stuff
+#Every important character will have its own class for logic stuff.
 class vee(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__(self)
