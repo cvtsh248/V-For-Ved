@@ -8,6 +8,12 @@ from pygame.locals import *
 class Vee(pygame.sprite.Sprite):
     def __init__(self):
         super(Vee, self).__init__()
+        self.movex = 0 # move along X
+        self.movey = 0 # move along Y
+        self.frame = 0
+
+        self.speed = 3 #pixels per cycle
+
         self.images_walk = []
         self.last = ''
         for i in range (1,5): #walk
@@ -31,16 +37,18 @@ class Vee(pygame.sprite.Sprite):
         
         if l == True:
             self.last = 'l'
-            self.location[0]+=1
+            self.location[0]-=self.speed
             self.index += 1
+            self.rect.x -= self.speed
             if self.index >= len(self.images_walk)-1: #walk cycles
                 self.index = 0
             self.image=self.images_walk[self.index]
 
         if r == True:
             self.last = 'r'
-            self.location[0]-=1
+            self.location[0]+= self.speed
             self.index += 1
+            self.rect.x += self.speed
             if self.index >= len(self.images_walk)-1: #walk cycle
                 self.index = 0
             self.image=self.images_walk[self.index]
