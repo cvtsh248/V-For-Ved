@@ -15,7 +15,7 @@ class vee(pygame.sprite.Sprite):
             self.images_idle.append(pygame.image.load('<IMGHERE>'+str(i)))
         #Image and animation stuff to be added
 
-        self.index = 0 #for sprite animation
+        self.index = 0 #for sprite animations
         self.location = [250,250]
 
         self.rect = pygame.Rect(5, 5, 32, 32)
