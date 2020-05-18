@@ -4,7 +4,7 @@ clock = pygame.time.Clock()
 
 from pygame.locals import *
 
-import sprites #dialog, logic
+from sprites import * #dialog, logic
 
 import math
 
@@ -15,6 +15,9 @@ pygame.display.set_caption('V for Ved')
 
 WINDOW_SIZE = (500,500) #subject to change
 screen = pygame.display.set_mode(WINDOW_SIZE)
+
+player = Vee()
+sprite_group = pygame.sprite.Group(player)
 
 p_location = [250,250]
 p_yvel = 0
@@ -46,6 +49,9 @@ while True: #TO BE TURNED INTO A CLASS
                 mv_l = False
             if event.key == K_UP:
                 jump == True
+    sprite_group.update(mv_l,mv_r)
+    sprite_group.draw(screen)
  
     pygame.display.update()
-    clock.tick(60)
+    
+    clock.tick(10)

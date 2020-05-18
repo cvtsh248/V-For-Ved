@@ -5,15 +5,15 @@ import os
 from pygame.locals import *
 
 #Every important character will have its own class for logic stuff.
-class vee(pygame.sprite.Sprite):
+class Vee(pygame.sprite.Sprite):
     def __init__(self):
-        super().__init__(self)
+        super(Vee, self).__init__()
         self.images_walk = []
-        for i in range (0,20): #walk
-            self.images_walk.append(pygame.image.load(os.path.abspath(os.path.join(path, os.pardir))+'/Assets/Characters/Playable/Vee/Walk/'+'VEEE_walk-'+str(i)+'.png'))
+        for i in range (1,5): #walk
+            self.images_walk.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Walk/'+'VEEE_walk-'+str(i)+'.png'))
         self.images_idle = []
-        for i in range (0,20): #idle
-            self.images_walk.append(pygame.image.load(os.path.abspath(os.path.join(path, os.pardir))+'/Assets/Characters/Playable/Vee/Idle/'+'VEEE_Idle-'+str(i)+'.png'))
+        for i in range (1,6): #idle
+            self.images_idle.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Idle/'+'VEEE_Idle-'+str(i)+'.png'))
         #Image and animation stuff to be added
 
         self.index = 0 #for sprite animations
@@ -26,7 +26,7 @@ class vee(pygame.sprite.Sprite):
         self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
-    def updatePosition(self,l, r):
+    def update(self,l, r):
         last = ''
         if l == True:
             last = 'l'
@@ -35,11 +35,12 @@ class vee(pygame.sprite.Sprite):
             if self.index >= len(self.images_walk)-1: #walk cycles
                 self.index = 0
             self.image=self.images_walk[self.index]
+            pygame.transform.flip(self.image, True, False)
         if r == True:
             last = 'r'
             self.location[0]-=1
             self.index += 1
-            if self.index >= len(self.walk)-1: #walk cycle
+            if self.index >= len(self.images_walk)-1: #walk cycle
                 self.index = 0
             self.image=self.images_walk[self.index]
         if r == False and l == False:
@@ -47,7 +48,7 @@ class vee(pygame.sprite.Sprite):
             if self.index >= len(self.images_idle)-1: #idle cycle
                 self.index = 0
             self.image=self.images_idle[self.index]
-        #ADD IMAGE FLIPPING pygame.transform.flip(self.image, True, False)
+        
     
     def interact(self, name):
         phrase = self.phrases_spoken[random.randint(0,len(self.phrases_spoken)-1)]
@@ -56,6 +57,7 @@ class vee(pygame.sprite.Sprite):
         except:
             pass
         return phrase
+
     def mutter(self):
         phrase = self.random_phrases[random.randint(0,len(self.random_phrases)-1)]
         return phrase
