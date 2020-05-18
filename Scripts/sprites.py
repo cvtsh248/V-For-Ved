@@ -1,6 +1,7 @@
 import random
 import math
 import pygame, sys
+import os
 from pygame.locals import *
 
 #Every important character will have its own class for logic stuff.
@@ -8,11 +9,11 @@ class vee(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__(self)
         self.images_walk = []
-        for i in range (0,20):
-            self.images_walk.append(pygame.image.load('<IMGHERE>'+str(i)))
+        for i in range (0,20): #walk
+            self.images_walk.append(pygame.image.load(os.path.abspath(os.path.join(path, os.pardir))+'/Assets/Characters/Playable/Vee/Walk/'+'VEEE_walk-'+str(i)+'.png'))
         self.images_idle = []
-        for i in range (0,20):
-            self.images_idle.append(pygame.image.load('<IMGHERE>'+str(i)))
+        for i in range (0,20): #idle
+            self.images_walk.append(pygame.image.load(os.path.abspath(os.path.join(path, os.pardir))+'/Assets/Characters/Playable/Vee/Idle/'+'VEEE_Idle-'+str(i)+'.png'))
         #Image and animation stuff to be added
 
         self.index = 0 #for sprite animations
