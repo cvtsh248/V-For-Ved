@@ -25,7 +25,7 @@ class vee(pygame.sprite.Sprite):
         self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
-    def updatePosition(l, r):
+    def updatePosition(self,l, r):
         last = ''
         if l == True:
             last = 'l'
@@ -41,7 +41,7 @@ class vee(pygame.sprite.Sprite):
             if self.index >= len(self.walk)-1: #walk cycle
                 self.index = 0
             self.image=self.images_walk[self.index]
-        if r == False and l = False:
+        if r == False and l == False:
             self.index += 1
             if self.index >= len(self.images_idle)-1: #idle cycle
                 self.index = 0
