@@ -9,6 +9,7 @@ class Vee(pygame.sprite.Sprite):
     def __init__(self):
         super(Vee, self).__init__()
         self.images_walk = []
+        self.last = ''
         for i in range (1,5): #walk
             self.images_walk.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Walk/'+'VEEE_walk-'+str(i)+'.png'))
         self.images_idle = []
@@ -27,27 +28,33 @@ class Vee(pygame.sprite.Sprite):
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
     def update(self,l, r):
-        last = ''
+        
         if l == True:
-            last = 'l'
+            self.last = 'l'
             self.location[0]+=1
             self.index += 1
             if self.index >= len(self.images_walk)-1: #walk cycles
                 self.index = 0
             self.image=self.images_walk[self.index]
-            pygame.transform.flip(self.image, True, False)
+
         if r == True:
-            last = 'r'
+            self.last = 'r'
             self.location[0]-=1
             self.index += 1
             if self.index >= len(self.images_walk)-1: #walk cycle
                 self.index = 0
             self.image=self.images_walk[self.index]
+            self.image=pygame.transform.flip(self.image, True, False)
+
         if r == False and l == False:
             self.index += 1
             if self.index >= len(self.images_idle)-1: #idle cycle
                 self.index = 0
-            self.image=self.images_idle[self.index]
+            if self.last == 'r':
+                self.image=self.images_idle[self.index]
+                self.image=pygame.transform.flip(self.image, True, False)
+            else:
+                self.image=self.images_idle[self.index]
         
     
     def interact(self, name):
