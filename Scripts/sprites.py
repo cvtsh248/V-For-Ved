@@ -31,7 +31,7 @@ class vee(pygame.sprite.Sprite):
             last = 'l'
             self.location[0]+=1
             self.index += 1
-            if self.index >= len(self.images_walk)-1: #walk cycle
+            if self.index >= len(self.images_walk)-1: #walk cycles
                 self.index = 0
             self.image=self.images_walk[self.index]
         if r == True:
