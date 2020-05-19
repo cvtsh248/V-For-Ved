@@ -12,7 +12,7 @@ class Vee(pygame.sprite.Sprite):
         self.movey = 0 # move along Y
         self.frame = 0
 
-        self.speed = 3 #pixels per cycle
+        self.speed = 10 #pixels per cycle
 
         self.images_walk = []
         self.last = ''
@@ -43,6 +43,7 @@ class Vee(pygame.sprite.Sprite):
             if self.index >= len(self.images_walk)-1: #walk cycles
                 self.index = 0
             self.image=self.images_walk[self.index]
+            
 
         if r == True:
             self.last = 'r'
@@ -63,7 +64,8 @@ class Vee(pygame.sprite.Sprite):
                 self.image=pygame.transform.flip(self.image, True, False)
             else:
                 self.image=self.images_idle[self.index]
-        
+
+        self.image=pygame.transform.scale(self.image,(128,128)) #upscale
     
     def interact(self, name):
         phrase = self.phrases_spoken[random.randint(0,len(self.phrases_spoken)-1)]
