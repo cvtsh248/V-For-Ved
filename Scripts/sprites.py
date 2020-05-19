@@ -5,6 +5,7 @@ import os
 from pygame.locals import *
 
 #Every important character will have its own class for logic stuff.
+#Vee is the *ONLY* playable class
 class Vee(pygame.sprite.Sprite):
     def __init__(self):
         super(Vee, self).__init__()
@@ -80,4 +81,4 @@ class Vee(pygame.sprite.Sprite):
         return phrase
     #Unfinished
 
-    
+# NPCs go below this comment
