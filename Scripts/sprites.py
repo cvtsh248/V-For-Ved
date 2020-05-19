@@ -140,8 +140,7 @@ class Odd(pygame.sprite.Sprite):
             self.rect.x -= self.speed
             if self.index >= len(self.images_walk)-1: #walk cycles
                 self.index = len(self.images_walk)-1
-            self.image=self.images_walk[self.index]
-            
+            self.image=self.images_walk[self.index]           
 
         if R == True:
             self.last = 'r'
