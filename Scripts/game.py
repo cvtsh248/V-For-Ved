@@ -43,15 +43,16 @@ while True: #TO BE TURNED INTO A CLASS
             if event.key == K_LEFT:
                 mv_l = True
             if event.key == K_UP:
-                jump == True
+                jump = True
         if event.type == KEYUP:
             if event.key == K_RIGHT:
                 mv_r = False
             if event.key == K_LEFT:
                 mv_l = False
             if event.key == K_UP:
-                jump == True
-    player_group.update(mv_l,mv_r)
+                jump = False
+    player_group.update(mv_l,mv_r, jump)
+    print(jump)
     player_group.draw(screen)
 
     npc_group.update()

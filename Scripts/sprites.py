@@ -34,29 +34,42 @@ class Vee(pygame.sprite.Sprite):
         self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
-    def update(self,l, r):
+    def update(self,l, r, j):
         
-        if l == True:
+        if l == True and r == False:
             self.last = 'l'
             self.location[0]-=self.speed
-            self.index += 1
             self.rect.x -= self.speed
-            if self.index >= len(self.images_walk)-1: #walk cycles
-                self.index = 0
-            self.image=self.images_walk[self.index]
-            
+            if j == False:
+                self.index += 1
+                if self.index >= len(self.images_walk)-1: #walk cycles
+                    self.index = 0
+                self.image=self.images_walk[self.index]
 
-        if r == True:
+        if r == True and l == False:
             self.last = 'r'
             self.location[0]+= self.speed
-            self.index += 1
             self.rect.x += self.speed
-            if self.index >= len(self.images_walk)-1: #walk cycle
-                self.index = 0
-            self.image=self.images_walk[self.index]
+            if j == False:
+                self.index += 1
+                if self.index >= len(self.images_walk)-1: #walk cycle
+                    self.index = 0
+                self.image=self.images_walk[self.index]
             self.image=pygame.transform.flip(self.image, True, False)
+        
+        if j == True:
+            self.index += 1
+            if self.index >= len(self.images_idle)-3: #Jump implementation
+                self.index = len(self.images_idle)-3
+            self.image=self.images_idle[self.index]
+            if self.last == 'r':
+                self.image=self.images_idle[self.index]
+                self.image=pygame.transform.flip(self.image, True, False)
+            else:
+                self.image=self.images_idle[self.index]
+        
 
-        if r == False and l == False:
+        if r == False and l == False and j == False:
             self.index += 1
             if self.index >= len(self.images_idle)-1: #idle cycle
                 self.index = 0
@@ -68,11 +81,6 @@ class Vee(pygame.sprite.Sprite):
 
         self.image=pygame.transform.scale(self.image,(128,128)) #upscaladd
         phrase = self.phrases_spoken[random.randint(0,len(self.phrases_spoken)-1)]
-        try:
-            phrase.replace('<name>', name)
-        except:
-            pass
-        return phrase
 
     def mutter(self):
         phrase = self.random_phrases[random.randint(0,len(self.random_phrases)-1)]
