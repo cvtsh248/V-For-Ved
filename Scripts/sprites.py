@@ -13,6 +13,10 @@ class Vee(pygame.sprite.Sprite):
         self.movey = 0 # move along Y
         self.frame = 0
 
+        self.ycollide = True
+
+        self.yvel = 0
+
         self.speed = 10 #pixels per cycle
 
         self.images_walk = []
@@ -35,7 +39,12 @@ class Vee(pygame.sprite.Sprite):
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
     def update(self,l, r, j):
-        
+
+        if self.rect.y > 250:
+            self.ycollide = True
+        if self.rect.y < 250:
+            self.ycollide = False
+            j == False
         if l == True and r == False:
             self.last = 'l'
             self.location[0]-=self.speed
@@ -59,6 +68,7 @@ class Vee(pygame.sprite.Sprite):
         
         if j == True:
             self.index += 1
+            self.yvel = 3
             if self.index >= len(self.images_idle)-3: #Jump implementation
                 self.index = len(self.images_idle)-3
             self.image=self.images_idle[self.index]
@@ -67,7 +77,8 @@ class Vee(pygame.sprite.Sprite):
                 self.image=pygame.transform.flip(self.image, True, False)
             else:
                 self.image=self.images_idle[self.index]
-        
+            j == False
+            
 
         if r == False and l == False and j == False:
             self.index += 1
@@ -80,7 +91,12 @@ class Vee(pygame.sprite.Sprite):
                 self.image=self.images_idle[self.index]
 
         self.image=pygame.transform.scale(self.image,(128,128)) #upscaladd
-        phrase = self.phrases_spoken[random.randint(0,len(self.phrases_spoken)-1)]
+        if self.ycollide == False and j==False:
+            self.yvel -= 0.5
+        if self.ycollide == True and j==False:
+            self.yvel = 0
+        print(self.rect.y)
+        self.rect.y -= self.yvel
 
     def mutter(self):
         phrase = self.random_phrases[random.randint(0,len(self.random_phrases)-1)]
