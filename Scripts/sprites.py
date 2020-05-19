@@ -66,9 +66,7 @@ class Vee(pygame.sprite.Sprite):
             else:
                 self.image=self.images_idle[self.index]
 
-        self.image=pygame.transform.scale(self.image,(128,128)) #upscale
-    
-    def interact(self, name):
+        self.image=pygame.transform.scale(self.image,(128,128)) #upscaladd
         phrase = self.phrases_spoken[random.randint(0,len(self.phrases_spoken)-1)]
         try:
             phrase.replace('<name>', name)
