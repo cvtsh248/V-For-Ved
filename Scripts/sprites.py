@@ -29,10 +29,10 @@ class Vee(pygame.sprite.Sprite):
         #Image and animation stuff to be added
 
         self.index = 0 #for sprite animations
-        self.location = [250,250]
+        self.location = [0,0]
 
-        self.rect = pygame.Rect(5, 5, 32, 32)
-        self.rect.center = (250, 250)
+        self.rect = pygame.Rect(0, 0, 128, 128)
+        self.rect.center = (64, 64)
 
         self.health = 100
         self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
