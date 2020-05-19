@@ -82,3 +82,69 @@ class Vee(pygame.sprite.Sprite):
     #Unfinished
 
 # NPCs go below this comment
+class Odd(pygame.sprite.Sprite):
+    def __init__(self):
+        super(Odd, self).__init__()
+        self.movex = 0 # move along X
+        self.movey = 0 # move along Y
+        self.frame = 0
+
+        self.speed = 10 #pixels per cycle
+
+        self.images_walk = []
+        self.last = ''
+        for i in range (1,9): #hover
+            self.images_walk.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Mr.\ Odd/Walk/Hover'+'OddHover-'+str(i)+'.png'))
+        
+        self.images_idle_shine = []
+        for i in range (1,13): #Shine idle
+            self.images_hover.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Mr.\ Odd/Idle/Shine'+'OddShine-'+str(i)+'.png'))
+
+        
+        #Image and animation stuff to be added
+
+        self.index = 0 #for sprite animations
+        self.location = [250,250]
+
+        self.rect = pygame.Rect(5, 5, 32, 32)
+        self.rect.center = (250, 250)
+
+        self.health = 100
+        '''
+        self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
+        self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
+                                'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
+        '''
+    def update(self,l, r):
+
+        if l == True:
+            self.last = 'l'
+            self.location[0]-=self.speed
+            self.index += 1
+            self.rect.x -= self.speed
+            if self.index >= len(self.images_walk)-1: #walk cycles
+                self.index = 0
+            self.image=self.images_walk[self.index]
+            
+
+        if r == True:
+            self.last = 'r'
+            self.location[0]+= self.speed
+            self.index += 1
+            self.rect.x += self.speed
+            if self.index >= len(self.images_walk)-1: #walk cycle
+                self.index = 0
+            self.image=self.images_walk[self.index]
+            self.image=pygame.transform.flip(self.image, True, False)
+
+        if r == False and l == False:
+            self.index += 1
+            if self.index >= len(self.images_idle)-1: #idle cycle
+                self.index = 0
+            if self.last == 'r':
+                self.image=self.images_idle[self.index]
+                self.image=pygame.transform.flip(self.image, True, False)
+            else:
+                self.image=self.images_idle[self.index]
+
+        self.image=pygame.transform.scale(self.image,(128,128)) #upscale
