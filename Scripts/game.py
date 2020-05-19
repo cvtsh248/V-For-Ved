@@ -18,8 +18,8 @@ screen = pygame.display.set_mode(WINDOW_SIZE)
 
 player = Vee()
 odd = Odd()
-sprite_group = pygame.sprite.Group(odd)
-sprite_group.add(player)
+player_group = pygame.sprite.Group(player)
+npc_group = pygame.sprite.Group(odd)
 
 p_location = [250,250]
 p_yvel = 0
@@ -51,8 +51,11 @@ while True: #TO BE TURNED INTO A CLASS
                 mv_l = False
             if event.key == K_UP:
                 jump == True
-    sprite_group.update(mv_l,mv_r)
-    sprite_group.draw(screen)
+    player_group.update(mv_l,mv_r)
+    player_group.draw(screen)
+
+    npc_group.update()
+    npc_group.draw(screen)
  
     pygame.display.update()
     

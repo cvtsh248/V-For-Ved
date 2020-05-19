@@ -88,6 +88,8 @@ class Odd(pygame.sprite.Sprite):
         self.movex = 0 # move along X
         self.movey = 0 # move along Y
         self.frame = 0
+        self.count = 0
+        self.di = 0 #state bool
 
         self.speed = 10 #pixels per cycle
 
@@ -115,18 +117,21 @@ class Odd(pygame.sprite.Sprite):
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
         '''
-    def update(self,l, r):
-
-        di = random.randint(-1000,1000)
+    def update(self):
+        self.count += 1
+        if self.count == 1:
+            self.di = 300
+        if self.count%4 == 0:
+            self.di = random.randint(-300,300)
         L = False
         R = False
-        if di > -100 and di < -30:
+        if self.di > -100 and self.di < -50:
             L = True
             R = False
-        if di > -30 and di < 30:
+        if self.di > -50 and self.di < 50:
             L = False
             R = False
-        if di > 30 and di < 100:
+        if self.di > 50 and self.di < 100:
             L = False
             R = True
 
