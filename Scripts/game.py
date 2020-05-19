@@ -17,7 +17,9 @@ WINDOW_SIZE = (500,500) #subject to change
 screen = pygame.display.set_mode(WINDOW_SIZE)
 
 player = Vee()
-sprite_group = pygame.sprite.Group(player)
+odd = Odd()
+sprite_group = pygame.sprite.Group(odd)
+sprite_group.add(player)
 
 p_location = [250,250]
 p_yvel = 0

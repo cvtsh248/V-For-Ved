@@ -94,11 +94,11 @@ class Odd(pygame.sprite.Sprite):
         self.images_walk = []
         self.last = ''
         for i in range (1,9): #hover
-            self.images_walk.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Mr.\ Odd/Walk/Hover'+'OddHover-'+str(i)+'.png'))
+            self.images_walk.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/NPC/MrOdd/Walk/Hover/'+'OddHover-'+str(i)+'.png'))
         
         self.images_idle_shine = []
         for i in range (1,13): #Shine idle
-            self.images_hover.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Mr.\ Odd/Idle/Shine'+'OddShine-'+str(i)+'.png'))
+            self.images_idle_shine.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/NPC/MrOdd/Idle/Shine/'+'OddShine-'+str(i)+'.png'))
 
         
         #Image and animation stuff to be added
@@ -117,34 +117,47 @@ class Odd(pygame.sprite.Sprite):
         '''
     def update(self,l, r):
 
-        if l == True:
+        di = random.randint(-1000,1000)
+        L = False
+        R = False
+        if di > -100 and di < -30:
+            L = True
+            R = False
+        if di > -30 and di < 30:
+            L = False
+            R = False
+        if di > 30 and di < 100:
+            L = False
+            R = True
+
+        if L == True:
             self.last = 'l'
             self.location[0]-=self.speed
             self.index += 1
             self.rect.x -= self.speed
             if self.index >= len(self.images_walk)-1: #walk cycles
-                self.index = 0
+                self.index = len(self.images_walk)-1
             self.image=self.images_walk[self.index]
             
 
-        if r == True:
+        if R == True:
             self.last = 'r'
             self.location[0]+= self.speed
             self.index += 1
             self.rect.x += self.speed
             if self.index >= len(self.images_walk)-1: #walk cycle
-                self.index = 0
+                self.index = len(self.images_walk)-1
             self.image=self.images_walk[self.index]
             self.image=pygame.transform.flip(self.image, True, False)
 
-        if r == False and l == False:
+        if L == False and R == False:
             self.index += 1
-            if self.index >= len(self.images_idle)-1: #idle cycle
+            if self.index >= len(self.images_idle_shine)-1: #idle cycle
                 self.index = 0
             if self.last == 'r':
-                self.image=self.images_idle[self.index]
+                self.image=self.images_idle_shine[self.index]
                 self.image=pygame.transform.flip(self.image, True, False)
             else:
-                self.image=self.images_idle[self.index]
+                self.image=self.images_idle_shine[self.index]
 
         self.image=pygame.transform.scale(self.image,(128,128)) #upscale
