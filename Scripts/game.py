@@ -52,7 +52,6 @@ while True: #TO BE TURNED INTO A CLASS
             if event.key == K_UP:
                 jump = False
     player_group.update(mv_l,mv_r, jump)
-    print(jump)
     player_group.draw(screen)
 
     npc_group.update()
