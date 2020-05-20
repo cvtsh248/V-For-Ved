@@ -83,7 +83,7 @@ class Vee(pygame.sprite.Sprite):
         if j == True and self.jcount < 2:
             self.jcount += 1
             self.index += 1
-            self.yvel = 10
+            self.yvel = 20
             if self.index >= len(self.images_idle)-3: #Jump implementation
                 self.index = len(self.images_idle)-3
             self.image=self.images_idle[self.index]
@@ -110,7 +110,7 @@ class Vee(pygame.sprite.Sprite):
         if self.ycollide == True:
             self.jcount = 0
         if self.ycollide == False and j==False:
-            self.yvel -= 1
+            self.yvel -= 9
             
         if self.ycollide == True and j==False:
             self.yvel = 0
