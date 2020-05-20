@@ -15,9 +15,9 @@ class npc:
         self.flip = True
         self.AIcount = 0
         for i in range(1, len(os.listdir(os.getcwd() + path+'/Idle'))+1):
-            self.animationIdle.append(pygame.image.load(os.getcwd() + path + '/Idle/DAN-{}.png'.format(i))) #PLEASE NAME THE IMAGES ACCORDINGLY 
+            self.animationIdle.append(pygame.image.load(os.getcwd() + path + '/Idle/img{}.png'.format(i))) #PLEASE NAME THE IMAGES ACCORDINGLY 
         for i in range(1, len(os.listdir(os.getcwd() + path+'/Walk'))+1):
-            self.animationWalk.append(pygame.image.load(os.getcwd() + path + '/Walk/DANWalk-{}.png'.format(i))) #PLEASE NAME THE IMAGES ACCORDINGLY 
+            self.animationWalk.append(pygame.image.load(os.getcwd() + path + '/Walk/img{}.png'.format(i))) #PLEASE NAME THE IMAGES ACCORDINGLY 
             
 
         self.counter = 0
