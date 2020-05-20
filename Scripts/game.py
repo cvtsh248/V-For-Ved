@@ -54,8 +54,8 @@ while True: #TO BE TURNED INTO A CLASS
     player_group.update(mv_l,mv_r, jump)
     player_group.draw(screen)
 
-    npc_group.update()
-    npc_group.draw(screen)
+    #npc_group.update()
+    #npc_group.draw(screen)
  
     pygame.display.update()
     

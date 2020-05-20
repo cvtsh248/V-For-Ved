@@ -23,13 +23,14 @@ class Vee(pygame.sprite.Sprite):
 
         self.images_walk = []
         self.image = pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Idle/'+'VEEE_Idle-1.png')
+        self.image=pygame.transform.scale(self.image,(128,128))
+        
         self.last = ''
         for i in range (1,5): #walk
             self.images_walk.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Walk/'+'VEEE_walk-'+str(i)+'.png'))
         self.images_idle = []
         for i in range (1,6): #idle
             self.images_idle.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Idle/'+'VEEE_Idle-'+str(i)+'.png'))
-        #Image and animation stuff to be added
 
         self.index = 0 #for sprite animations
         self.location = [250,250]
@@ -44,14 +45,20 @@ class Vee(pygame.sprite.Sprite):
         self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
-    def update(self,l, r, j):
-
-        if self.rect.y > 250:
+    
+    def checkFloorCollison(self):
+        if self.rect.y > 372:
             self.ycollide = True
-            self.rect.y = 250
-        if self.rect.y < 250:
+            self.rect.y = 372
+        if self.rect.y < 372:
             self.ycollide = False
-            j == False
+
+    def update(self,l, r, j):
+        self.checkFloorCollison()
+
+        if self.ycollide == False:
+            j = False
+
         if l == True and r == False:
             self.last = 'l'
             self.location[0]-=self.speed
@@ -99,10 +106,12 @@ class Vee(pygame.sprite.Sprite):
                 self.image=self.images_idle[self.index]
 
         self.image=pygame.transform.scale(self.image,(128,128)) #upscaladd
+
         if self.ycollide == True:
             self.jcount = 0
         if self.ycollide == False and j==False:
             self.yvel -= 1
+            
         if self.ycollide == True and j==False:
             self.yvel = 0
         print(self.rect.y)
@@ -113,7 +122,10 @@ class Vee(pygame.sprite.Sprite):
         return phrase
     #Unfinished
 
-# NPCs go below this comment
+################################
+# NPCs go below this comment   #
+################################
+
 class Odd(pygame.sprite.Sprite):
     def __init__(self):
         super(Odd, self).__init__()
@@ -126,6 +138,7 @@ class Odd(pygame.sprite.Sprite):
         self.speed = 10 #pixels per cycle
 
         self.image = pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/NPC/MrOdd/Walk/Hover/'+'OddHover-1.png')
+        self.image=pygame.transform.scale(self.image,(128,128))
         self.images_walk = []
         self.last = ''
         for i in range (1,9): #hover
