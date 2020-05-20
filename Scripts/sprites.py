@@ -13,6 +13,8 @@ class Vee(pygame.sprite.Sprite):
         self.movey = 0 # move along Y
         self.frame = 0
 
+        self.jcount = 0
+
         self.ycollide = True
 
         self.yvel = 0
@@ -20,6 +22,7 @@ class Vee(pygame.sprite.Sprite):
         self.speed = 10 #pixels per cycle
 
         self.images_walk = []
+        self.image = pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Idle/'+'VEEE_Idle-1.png')
         self.last = ''
         for i in range (1,5): #walk
             self.images_walk.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Walk/'+'VEEE_walk-'+str(i)+'.png'))
@@ -29,10 +32,13 @@ class Vee(pygame.sprite.Sprite):
         #Image and animation stuff to be added
 
         self.index = 0 #for sprite animations
-        self.location = [0,0]
+        self.location = [250,250]
+        
+        self.rect = self.image.get_rect(center=self.location)
+        self.rect.center = (250, 250)
 
-        self.rect = pygame.Rect(0, 0, 128, 128)
-        self.rect.center = (64, 64)
+        self.rect.x = self.location[0]
+        self.rect.y = self.location[1]
 
         self.health = 100
         self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
@@ -42,6 +48,7 @@ class Vee(pygame.sprite.Sprite):
 
         if self.rect.y > 250:
             self.ycollide = True
+            self.rect.y = 250
         if self.rect.y < 250:
             self.ycollide = False
             j == False
@@ -66,9 +73,10 @@ class Vee(pygame.sprite.Sprite):
                 self.image=self.images_walk[self.index]
             self.image=pygame.transform.flip(self.image, True, False)
         
-        if j == True:
+        if j == True and self.jcount < 2:
+            self.jcount += 1
             self.index += 1
-            self.yvel = 3
+            self.yvel = 10
             if self.index >= len(self.images_idle)-3: #Jump implementation
                 self.index = len(self.images_idle)-3
             self.image=self.images_idle[self.index]
@@ -80,7 +88,7 @@ class Vee(pygame.sprite.Sprite):
             j == False
             
 
-        if r == False and l == False and j == False:
+        if r == False and l == False and j == False and self.jcount < 2:
             self.index += 1
             if self.index >= len(self.images_idle)-1: #idle cycle
                 self.index = 0
@@ -91,8 +99,10 @@ class Vee(pygame.sprite.Sprite):
                 self.image=self.images_idle[self.index]
 
         self.image=pygame.transform.scale(self.image,(128,128)) #upscaladd
+        if self.ycollide == True:
+            self.jcount = 0
         if self.ycollide == False and j==False:
-            self.yvel -= 0.5
+            self.yvel -= 1
         if self.ycollide == True and j==False:
             self.yvel = 0
         print(self.rect.y)
@@ -115,6 +125,7 @@ class Odd(pygame.sprite.Sprite):
 
         self.speed = 10 #pixels per cycle
 
+        self.image = pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/NPC/MrOdd/Walk/Hover/'+'OddHover-1.png')
         self.images_walk = []
         self.last = ''
         for i in range (1,9): #hover
@@ -130,8 +141,11 @@ class Odd(pygame.sprite.Sprite):
         self.index = 0 #for sprite animations
         self.location = [250,250]
 
-        self.rect = pygame.Rect(5, 5, 32, 32)
+        self.rect = self.image.get_rect(center=self.location)
         self.rect.center = (250, 250)
+
+        self.rect.x = self.location[0]
+        self.rect.y = self.location[1]
 
         self.health = 100
         '''
@@ -140,6 +154,7 @@ class Odd(pygame.sprite.Sprite):
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
         '''
     def update(self):
+        
         self.count += 1
         if self.count == 1:
             self.di = 300
