@@ -31,7 +31,7 @@ class npc(pygame.sprite.Sprite):
         self.rect.y = y
 
         self.counter = 0
-    def display(self, screen):
+    def display(self):
         if not self.idle:
             if self.xVel > 0:
                 self.flip = True
@@ -69,9 +69,9 @@ class npc(pygame.sprite.Sprite):
     
         
     
-    def update(self, screen):
+    def update(self):
         self.rect.x += self.xVel
-        self.display(screen)
+        self.display()
         self.AI()
 
     
