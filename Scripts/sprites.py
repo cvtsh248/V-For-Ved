@@ -47,10 +47,10 @@ class Vee(pygame.sprite.Sprite):
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
     
     def checkFloorCollison(self):
-        if self.rect.y > 372:
+        if self.rect.y > 720-128:
             self.ycollide = True
-            self.rect.y = 372
-        if self.rect.y < 372:
+            self.rect.y = 720-128
+        if self.rect.y < 720-128:
             self.ycollide = False
 
     def update(self,l, r, j):
@@ -83,9 +83,9 @@ class Vee(pygame.sprite.Sprite):
         if j == True and self.jcount < 2:
             self.jcount += 1
             self.index += 1
-            self.yvel = 20
-            if self.index >= len(self.images_idle)-3: #Jump implementation
-                self.index = len(self.images_idle)-3
+            self.yvel = 25
+            if self.index >= len(self.images_idle)-1: #Jump implementation
+                self.index = len(self.images_idle)-1
             self.image=self.images_idle[self.index]
             if self.last == 'r':
                 self.image=self.images_idle[self.index]
@@ -95,7 +95,7 @@ class Vee(pygame.sprite.Sprite):
             j == False
             
 
-        if r == False and l == False and j == False and self.jcount < 2:
+        if r == False and l == False and j == False and self.jcount < 2 and self.ycollide == True:
             self.index += 1
             if self.index >= len(self.images_idle)-1: #idle cycle
                 self.index = 0

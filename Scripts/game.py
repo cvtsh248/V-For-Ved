@@ -13,7 +13,7 @@ vec = pygame.math.Vector2
 pygame.init()
 pygame.display.set_caption('V for Ved')
 
-WINDOW_SIZE = (500,500) #subject to change
+WINDOW_SIZE = (1280,720) #subject to change
 screen = pygame.display.set_mode(WINDOW_SIZE)
 
 player = Vee()
