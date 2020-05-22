@@ -116,7 +116,7 @@ class Vee(pygame.sprite.Sprite):
             
         if self.ycollide == True and j==False:
             self.yvel = 0
-        print(self.rect.y)
+        #print(self.rect.y)
         self.rect.y -= self.yvel
 
     def mutter(self):

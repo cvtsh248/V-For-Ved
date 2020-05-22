@@ -10,20 +10,26 @@ import math
 
 from tiles import *
 
+from lvl import *
+
 vec = pygame.math.Vector2
 
 pygame.init()
 pygame.display.set_caption('V for Ved')
 
-WINDOW_SIZE = (1280,720) #subject to change
+WINDOW_SIZE = (1280,768) #subject to change
 screen = pygame.display.set_mode(WINDOW_SIZE)
 
 player = Vee()
 odd = Odd()
 
 tile_group = pygame.sprite.Group()
-#for i in range(0,10):
-tile_group.add(Tile(128,592,'Assets/Tiles/Bricks/StoneBrick.png',1,1))
+for y in range(0,12):
+    for x in range(0,20):
+        coord = level[y][x]
+        if coord == 1:
+            tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Bricks/StoneBrick.png',1,1))
+
 player_group = pygame.sprite.Group(player)
 npc_group = pygame.sprite.Group(odd)
 
