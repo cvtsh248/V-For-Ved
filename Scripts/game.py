@@ -28,7 +28,9 @@ for y in range(0,12):
     for x in range(0,20):
         coord = level[y][x]
         if coord == 1:
-            tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Bricks/StoneBrick.png',1,1))
+            tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONE0.png',1,1))
+        if coord == 2:
+            tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONE1.png',1,1))
 
 player_group = pygame.sprite.Group(player)
 npc_group = pygame.sprite.Group(odd)
