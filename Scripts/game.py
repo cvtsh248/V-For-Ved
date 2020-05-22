@@ -8,6 +8,8 @@ from sprites import * #dialog, logic
 
 import math
 
+from tiles import *
+
 vec = pygame.math.Vector2
 
 pygame.init()
@@ -18,6 +20,10 @@ screen = pygame.display.set_mode(WINDOW_SIZE)
 
 player = Vee()
 odd = Odd()
+
+tile_group = pygame.sprite.Group()
+#for i in range(0,10):
+tile_group.add(Tile(128,592,'Assets/Tiles/Bricks/StoneBrick.png',1,1))
 player_group = pygame.sprite.Group(player)
 npc_group = pygame.sprite.Group(odd)
 
@@ -56,6 +62,7 @@ while True: #TO BE TURNED INTO A CLASS
 
     #npc_group.update()
     #npc_group.draw(screen)
+    tile_group.draw(screen)
  
     pygame.display.update()
     

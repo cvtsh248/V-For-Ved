@@ -4,6 +4,7 @@ import pygame, sys
 import os
 from pygame.locals import *
 
+
 #Every important character will have its own class for logic stuff.
 #Vee is the *ONLY* playable class
 class Vee(pygame.sprite.Sprite):
@@ -16,6 +17,7 @@ class Vee(pygame.sprite.Sprite):
         self.jcount = 0
 
         self.ycollide = True
+        self.xcollide = False
 
         self.yvel = 0
 
@@ -36,7 +38,6 @@ class Vee(pygame.sprite.Sprite):
         self.location = [250,250]
         
         self.rect = self.image.get_rect(center=self.location)
-        self.rect.center = (250, 250)
 
         self.rect.x = self.location[0]
         self.rect.y = self.location[1]
@@ -47,11 +48,12 @@ class Vee(pygame.sprite.Sprite):
                                 'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
     
     def checkFloorCollison(self):
-        if self.rect.y > 720-128:
+        if self.rect.y > 768-128:
             self.ycollide = True
-            self.rect.y = 720-128
-        if self.rect.y < 720-128:
+            self.rect.y = 768-128
+        if self.rect.y < 768-128:
             self.ycollide = False
+
 
     def update(self,l, r, j):
         self.checkFloorCollison()
