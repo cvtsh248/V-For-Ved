@@ -3,6 +3,7 @@ import math
 import pygame, sys
 import os
 from pygame.locals import *
+from lvl import *
 
 
 #Every important character will have its own class for logic stuff.
@@ -45,7 +46,7 @@ class Vee(pygame.sprite.Sprite):
         self.health = 100
         self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
-                                'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?'] #directed at people
+                                'ITS YOUR FAULT!', 'EEEEH', 'Eh, you ah!', 'YOU DID IT!', 'Do you want to be belted, <name>?', 'YOU FUCCKKING DID IT!!'] #directed at people
     
     def checkFloorCollison(self):
         if self.rect.y > 768-128:
@@ -53,7 +54,10 @@ class Vee(pygame.sprite.Sprite):
             self.rect.y = 768-128
         if self.rect.y < 768-128:
             self.ycollide = False
-
+    '''
+    def checkTileCollision(self, tilemap):
+        for x in range(0,)
+    '''
 
     def update(self,l, r, j):
         self.checkFloorCollison()
@@ -85,7 +89,7 @@ class Vee(pygame.sprite.Sprite):
         if j == True and self.jcount < 2:
             self.jcount += 1
             self.index += 1
-            self.yvel = 25
+            self.yvel = 30
             if self.index >= len(self.images_idle)-1: #Jump implementation
                 self.index = len(self.images_idle)-1
             self.image=self.images_idle[self.index]

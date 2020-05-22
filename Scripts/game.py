@@ -24,7 +24,7 @@ player = Vee()
 odd = Odd()
 
 tile_group = pygame.sprite.Group()
-for y in range(0,12):
+for y in range(0,12): #render tiles based on tile map
     for x in range(0,20):
         coord = level[y][x]
         if coord == 1:
@@ -43,7 +43,7 @@ mv_l = False
 jump = False
 contact_floor = False
 
-while True: #TO BE TURNED INTO A CLASS
+while True: #gameloop
     screen.fill((255,255,255))
 
     for event in pygame.event.get():
