@@ -31,7 +31,8 @@ for y in range(0,12): #render tiles based on tile map
             tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONE0.png',1,1))
         if coord == 2:
             tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONE1.png',1,1))
-
+        if coord == 3:
+            tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONETOP.png',1,1))
 player_group = pygame.sprite.Group(player)
 npc_group = pygame.sprite.Group(odd)
 

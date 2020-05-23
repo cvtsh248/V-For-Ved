@@ -17,7 +17,7 @@ class Vee(pygame.sprite.Sprite):
 
         self.jcount = 0
 
-        self.ycollide = True
+        self.ycollide = False
         self.xcollide = False
 
         self.yvel = 0
@@ -36,7 +36,7 @@ class Vee(pygame.sprite.Sprite):
             self.images_idle.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Idle/'+'VEEE_Idle-'+str(i)+'.png'))
 
         self.index = 0 #for sprite animations
-        self.location = [250,250]
+        self.location = [250,400]
         
         self.rect = self.image.get_rect(center=self.location)
 
@@ -54,13 +54,31 @@ class Vee(pygame.sprite.Sprite):
             self.rect.y = 768-128
         if self.rect.y < 768-128:
             self.ycollide = False
+        self.location[1] = self.rect.y
     '''
-    def checkTileCollision(self, tilemap):
-        for x in range(0,)
+    def checkTileCollision(self):
+        for y in range(0,12): #tile collision based on tile map
+            for x in range(0,20):
+                coord = level[y][x]
+                if coord > 0:
+                    if self.location[1] >= y*64-128:
+                        self.ycollide = True
+                    if self.location[1] < y*64-128:
+                        self.ycollide = False
+                if coord == 0:
+                    self.ycollide = False
+        self.location[1] = self.rect.y
     '''
+    def checkTileCollision(self):
+        maploc = [round(self.location[0]/64),round((self.location[1]+128)/64)] #mapping location to tile space
+        coord = level[maploc[1]-1][maploc[0]]
+        
+        print (coord)
 
     def update(self,l, r, j):
         self.checkFloorCollison()
+        #print(self.location)
+        self.checkTileCollision()
 
         if self.ycollide == False:
             j = False
@@ -89,7 +107,7 @@ class Vee(pygame.sprite.Sprite):
         if j == True and self.jcount < 2:
             self.jcount += 1
             self.index += 1
-            self.yvel = 30
+            self.yvel = 24
             if self.index >= len(self.images_idle)-1: #Jump implementation
                 self.index = len(self.images_idle)-1
             self.image=self.images_idle[self.index]
@@ -111,17 +129,20 @@ class Vee(pygame.sprite.Sprite):
             else:
                 self.image=self.images_idle[self.index]
 
-        self.image=pygame.transform.scale(self.image,(128,128)) #upscaladd
+        self.image=pygame.transform.scale(self.image,(128,128)) #upscale
 
         if self.ycollide == True:
             self.jcount = 0
         if self.ycollide == False and j==False:
-            self.yvel -= 9
+            self.yvel -= 4
+            print(self.yvel)
             
         if self.ycollide == True and j==False:
             self.yvel = 0
         #print(self.rect.y)
         self.rect.y -= self.yvel
+        self.location[1] = self.rect.y
+        
 
     def mutter(self):
         phrase = self.random_phrases[random.randint(0,len(self.random_phrases)-1)]
