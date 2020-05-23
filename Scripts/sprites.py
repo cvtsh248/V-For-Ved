@@ -22,7 +22,7 @@ class Vee(pygame.sprite.Sprite):
 
         self.yvel = 0
 
-        self.speed = 10 #pixels per cycle
+        self.speed = 8 #pixels per cycle
 
         self.images_walk = []
         self.image = pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Idle/'+'VEEE_Idle-1.png')
@@ -69,18 +69,29 @@ class Vee(pygame.sprite.Sprite):
                     self.ycollide = False
         self.location[1] = 
     '''
-    def checkTileCollision(self): #Todo: add x collisions
-        maploc = [round((self.location[0]+45)/64),round((self.location[1]+160)/64)] #mapping location to tile space
+    def checkTileCollision(self,l,r): #Todo: add x collisions
+        maploc = [round((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space
         coord = level[maploc[1]-1][maploc[0]]
         if coord > 0:
             self.ycollide = True
             self.rect.y = maploc[1]*64-190
-        print (maploc[1]*64)
+        #try:
+        if (level[maploc[1]-2][maploc[0]+1]) > 0:
+            if self.location[0]>=(64*(maploc[0]+1)-100) and self.location[0]<=(64*(maploc[0]+1)+100):
+                self.xcollide = True
+            else:
+                self.xcollide = False
+        else:
+            self.xcollide = False
+        '''
+        except:
+            self.xcollide = False
+            pass
+        '''
 
     def update(self,l, r, j):
         self.checkFloorCollison()
-        #print(self.ycollide)
-        self.checkTileCollision()
+        self.checkTileCollision(l,r)
 
         if self.ycollide == False:
             j = False
@@ -95,7 +106,7 @@ class Vee(pygame.sprite.Sprite):
                     self.index = 0
                 self.image=self.images_walk[self.index]
 
-        if r == True and l == False:
+        if r == True and l == False and self.xcollide == False:
             self.last = 'r'
             self.location[0]+= self.speed
             self.rect.x += self.speed
