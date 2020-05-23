@@ -36,7 +36,7 @@ class Vee(pygame.sprite.Sprite):
             self.images_idle.append(pygame.image.load(os.path.dirname(os.getcwd())+'/Assets/Characters/Playable/Vee/Idle/'+'VEEE_Idle-'+str(i)+'.png'))
 
         self.index = 0 #for sprite animations
-        self.location = [250,400]
+        self.location = [100,250]
         
         self.rect = self.image.get_rect(center=self.location)
 
@@ -70,11 +70,12 @@ class Vee(pygame.sprite.Sprite):
         self.location[1] = 
     '''
     def checkTileCollision(self):
-        maploc = [round(self.location[0]/64),round((self.location[1]+160)/64)] #mapping location to tile space
+        maploc = [round((self.location[0]+45)/64),round((self.location[1]+160)/64)] #mapping location to tile space
         coord = level[maploc[1]-1][maploc[0]]
         if coord > 0:
             self.ycollide = True
-        print (coord)
+            self.rect.y = maploc[1]*64-190
+        print (maploc[1]*64)
 
     def update(self,l, r, j):
         self.checkFloorCollison()
