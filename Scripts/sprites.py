@@ -67,17 +67,18 @@ class Vee(pygame.sprite.Sprite):
                         self.ycollide = False
                 if coord == 0:
                     self.ycollide = False
-        self.location[1] = self.rect.y
+        self.location[1] = 
     '''
     def checkTileCollision(self):
-        maploc = [round(self.location[0]/64),round((self.location[1]+128)/64)] #mapping location to tile space
+        maploc = [round(self.location[0]/64),round((self.location[1]+160)/64)] #mapping location to tile space
         coord = level[maploc[1]-1][maploc[0]]
-        
+        if coord > 0:
+            self.ycollide = True
         print (coord)
 
     def update(self,l, r, j):
         self.checkFloorCollison()
-        #print(self.location)
+        #print(self.ycollide)
         self.checkTileCollision()
 
         if self.ycollide == False:
@@ -135,7 +136,7 @@ class Vee(pygame.sprite.Sprite):
             self.jcount = 0
         if self.ycollide == False and j==False:
             self.yvel -= 4
-            print(self.yvel)
+            #print(self.yvel)
             
         if self.ycollide == True and j==False:
             self.yvel = 0
