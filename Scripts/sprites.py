@@ -70,9 +70,9 @@ class Vee(pygame.sprite.Sprite):
                     self.ycollide = False
         self.location[1] = 
     '''
-    def checkTileCollision(self,l,r): #Todo: add x collisions
-        maplocY = [math.floor((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space for Y collisions
-        maplocX = [round((self.location[0]+60)/64),round((self.location[1]+160)/64)]
+    def checkTileCollision(self,l,r): 
+        maplocY = [math.floor((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space for Y collisions AND for right side X collisons
+        maplocX = [round((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tilespace for left side X collisions
         coordX = level[maplocX[1]-1][maplocX[0]]
         coordY = level[maplocY[1]-1][maplocY[0]]
         if coordY > 0:
@@ -82,7 +82,7 @@ class Vee(pygame.sprite.Sprite):
             self.ycollide = False
         #try:
         if (level[maplocY[1]-2][maplocY[0]+1]) > 0:
-            if self.location[0]>=(64*(maplocY[0]+1)-100) and self.location[0]<=(64*(maplocY[0]+1)+100):
+            if self.location[0]>=(64*(maplocY[0]+1)-110) and self.location[0]<=(64*(maplocY[0]+1)+110):
                 self.xcollider = True
             else:
                 self.xcollider = False
@@ -90,7 +90,7 @@ class Vee(pygame.sprite.Sprite):
             self.xcollider = False
             
         if (level[maplocX[1]-2][maplocX[0]-2]) > 0:
-            if self.location[0]>=(64*(maplocX[0]-2)-40) and self.location[0]<=(64*(maplocX[0]-2)+40):
+            if self.location[0]>=(64*(maplocX[0]-2)-50) and self.location[0]<=(64*(maplocX[0]-2)+50):
                 self.xcollidel = True
             else:
                 self.xcollidel = False
@@ -143,7 +143,17 @@ class Vee(pygame.sprite.Sprite):
             j == False
             
 
-        if r == False and l == False and j == False and self.jcount < 2 and self.ycollide == True:
+        if r == False and l == False and j == False and self.jcount < 2 and self.ycollide == True and self.xcollider == False and self.xcollidel == False:
+            self.index += 1
+            if self.index >= len(self.images_idle)-1: #idle cycle
+                self.index = 0
+            if self.last == 'r':
+                self.image=self.images_idle[self.index]
+                self.image=pygame.transform.flip(self.image, True, False)
+            else:
+                self.image=self.images_idle[self.index]
+        
+        if self.xcollidel == True or self.xcollider == True:
             self.index += 1
             if self.index >= len(self.images_idle)-1: #idle cycle
                 self.index = 0
