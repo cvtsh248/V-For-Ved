@@ -81,7 +81,7 @@ class Vee(pygame.sprite.Sprite):
             self.ycollide = False
         #try:
         if (level[maplocY[1]-2][maplocY[0]+1]) > 0:
-            if self.location[0]>=(64*(maplocY[0]+1)-110) and self.location[0]<=(64*(maplocY[0]+1)+110):
+            if self.location[0]>=(64*(maplocY[0]+1)-100) and self.location[0]<=(64*(maplocY[0]+1)+100):
                 self.xcollider = True
             else:
                 self.xcollider = False
@@ -89,7 +89,7 @@ class Vee(pygame.sprite.Sprite):
             self.xcollider = False
             
         if (level[maplocX[1]-2][maplocX[0]-2]) > 0:
-            if self.location[0]>=(64*(maplocX[0]-2)-50) and self.location[0]<=(64*(maplocX[0]-2)+50):
+            if self.location[0]>=(64*(maplocX[0]-2)-40) and self.location[0]<=(64*(maplocX[0]-2)+40):
                 self.xcollidel = True
             else:
                 self.xcollidel = False
