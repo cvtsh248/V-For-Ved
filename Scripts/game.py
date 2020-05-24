@@ -19,11 +19,11 @@ pygame.display.set_caption('V for Ved')
 
 WINDOW_SIZE = (1280,768) #subject to change
 screen = pygame.display.set_mode(WINDOW_SIZE)
+tile_group = pygame.sprite.Group()
 
 player = Vee()
 odd = Odd()
 
-tile_group = pygame.sprite.Group()
 for y in range(0,12): #render tiles based on tile map
     for x in range(0,20):
         coord = level[y][x]
@@ -66,12 +66,15 @@ while True: #gameloop
                 mv_l = False
             if event.key == K_UP:
                 jump = False
+
+    tile_group.draw(screen)
+    
     player_group.update(mv_l,mv_r, jump)
     player_group.draw(screen)
 
     #npc_group.update()
     #npc_group.draw(screen)
-    tile_group.draw(screen)
+    
  
     pygame.display.update()
     

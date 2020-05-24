@@ -18,7 +18,8 @@ class Vee(pygame.sprite.Sprite):
         self.jcount = 0
 
         self.ycollide = False
-        self.xcollide = False
+        self.xcollider = False
+        self.xcollidel = False
 
         self.yvel = 0
 
@@ -70,33 +71,48 @@ class Vee(pygame.sprite.Sprite):
         self.location[1] = 
     '''
     def checkTileCollision(self,l,r): #Todo: add x collisions
-        maploc = [round((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space
-        coord = level[maploc[1]-1][maploc[0]]
-        if coord > 0:
+        maplocY = [math.floor((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space for Y collisions
+        maplocX = [round((self.location[0]+60)/64),round((self.location[1]+160)/64)]
+        coordX = level[maplocX[1]-1][maplocX[0]]
+        coordY = level[maplocY[1]-1][maplocY[0]]
+        if coordY > 0:
             self.ycollide = True
-            self.rect.y = maploc[1]*64-190
-        #try:
-        if (level[maploc[1]-2][maploc[0]+1]) > 0:
-            if self.location[0]>=(64*(maploc[0]+1)-100) and self.location[0]<=(64*(maploc[0]+1)+100):
-                self.xcollide = True
-            else:
-                self.xcollide = False
+            self.rect.y = maplocY[1]*64-190
         else:
-            self.xcollide = False
+            self.ycollide = False
+        #try:
+        if (level[maplocY[1]-2][maplocY[0]+1]) > 0:
+            if self.location[0]>=(64*(maplocY[0]+1)-100) and self.location[0]<=(64*(maplocY[0]+1)+100):
+                self.xcollider = True
+            else:
+                self.xcollider = False
+        else:
+            self.xcollider = False
+            
+        if (level[maplocX[1]-2][maplocX[0]-2]) > 0:
+            if self.location[0]>=(64*(maplocX[0]-2)-40) and self.location[0]<=(64*(maplocX[0]-2)+40):
+                self.xcollidel = True
+            else:
+                self.xcollidel = False
+        else:
+            self.xcollidel = False
+        
         '''
         except:
-            self.xcollide = False
+            self.xcollider = False
             pass
         '''
 
     def update(self,l, r, j):
-        self.checkFloorCollison()
+        #self.checkFloorCollison()
         self.checkTileCollision(l,r)
+
+        print(self.location)
 
         if self.ycollide == False:
             j = False
 
-        if l == True and r == False:
+        if l == True and r == False and self.xcollidel == False:
             self.last = 'l'
             self.location[0]-=self.speed
             self.rect.x -= self.speed
@@ -106,7 +122,7 @@ class Vee(pygame.sprite.Sprite):
                     self.index = 0
                 self.image=self.images_walk[self.index]
 
-        if r == True and l == False and self.xcollide == False:
+        if r == True and l == False and self.xcollider == False:
             self.last = 'r'
             self.location[0]+= self.speed
             self.rect.x += self.speed
