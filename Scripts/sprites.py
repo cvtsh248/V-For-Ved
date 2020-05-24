@@ -97,11 +97,6 @@ class Vee(pygame.sprite.Sprite):
         else:
             self.xcollidel = False
         
-        '''
-        except:
-            self.xcollider = False
-            pass
-        '''
 
     def update(self,l, r, j):
         #self.checkFloorCollison()
