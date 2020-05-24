@@ -5,7 +5,6 @@ import os
 from pygame.locals import *
 from lvl import *
 
-
 #Every important character will have its own class for logic stuff.
 #Vee is the *ONLY* playable class
 class Vee(pygame.sprite.Sprite):
@@ -99,7 +98,7 @@ class Vee(pygame.sprite.Sprite):
         
 
     def update(self,l, r, j):
-        #self.checkFloorCollison()
+        self.checkFloorCollison()
         self.checkTileCollision(l,r)
 
         print(self.location)
