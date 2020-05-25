@@ -4,6 +4,7 @@ import pygame, sys
 import os
 from pygame.locals import *
 from lvl import *
+from effects import *
 
 #Every important character will have its own class for logic stuff.
 #Vee is the *ONLY* playable class

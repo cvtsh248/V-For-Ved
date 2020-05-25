@@ -45,7 +45,7 @@ jump = False
 contact_floor = False
 
 while True: #gameloop
-    screen.fill((255,255,255))
+    screen.fill((24,123,120))
 
     for event in pygame.event.get():
         
