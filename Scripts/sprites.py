@@ -72,11 +72,12 @@ class Vee(pygame.sprite.Sprite):
     def checkTileCollision(self,l,r): 
         maplocY = [math.floor((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space for Y collisions AND for right side X collisons
         maplocX = [round((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tilespace for left side X collisions
-        maplocZ = [math.ceil((self.location[0]+60)/64),round((self.location[1]+160)/64)]
+        maplocZ = [math.floor(((self.location[0]+60)/64)-0.5),round((self.location[1]+160)/64)]
         coordX = level[maplocX[1]-1][maplocX[0]]
         coordY = level[maplocY[1]-1][maplocY[0]]
-        coordZ = level[maplocY[1]-1][maplocY[0]]
-        print(maplocX,maplocY)
+        coordZ = level[maplocZ[1]-1][maplocZ[0]]
+
+        print(math.floor(((self.location[0]+60)/64)-0.5))
         if coordY > 0:
             self.ycollide = True
             self.rect.y = maplocY[1]*64-190
@@ -86,11 +87,13 @@ class Vee(pygame.sprite.Sprite):
         elif coordZ > 0:
             self.ycollide = True
             self.rect.y = maplocZ[1]*64-190
+
         else:
             self.ycollide = False
+        #print(self.ycollide)
         #try:
         if (level[maplocY[1]-2][maplocY[0]+1]) > 0:
-            if self.location[0]>=(64*(maplocY[0]+1)-100) and self.location[0]<=(64*(maplocY[0]+1)+100):
+            if self.location[0]>=(64*(maplocY[0]+1)-110) and self.location[0]<=(64*(maplocY[0]+1)+110):
                 self.xcollider = True
             else:
                 self.xcollider = False
@@ -98,13 +101,12 @@ class Vee(pygame.sprite.Sprite):
             self.xcollider = False
             
         if (level[maplocX[1]-2][maplocX[0]-2]) > 0:
-            if self.location[0]>=(64*(maplocX[0]-2)-40) and self.location[0]<=(64*(maplocX[0]-2)+40):
+            if self.location[0]>=(64*(maplocX[0]-2)-50) and self.location[0]<=(64*(maplocX[0]-2)+50):
                 self.xcollidel = True
             else:
                 self.xcollidel = False
         else:
-            self.xcollidel = False
-        
+            self.xcollidel = False        
 
     def update(self,l, r, j):
         self.checkFloorCollison()
