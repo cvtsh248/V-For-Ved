@@ -5,7 +5,7 @@ import os
 from pygame.locals import *
 from lvl import *
 from effects import *
-
+accel = 8
 #Every important character will have its own class for logic stuff.
 #Vee is the *ONLY* playable class
 class Vee(pygame.sprite.Sprite):
@@ -18,6 +18,7 @@ class Vee(pygame.sprite.Sprite):
         self.jcount = 0
 
         self.ycollide = False
+        self.ycollidet = False
         self.xcollider = False
         self.xcollidel = False
 
@@ -70,6 +71,7 @@ class Vee(pygame.sprite.Sprite):
                     self.ycollide = False
         self.location[1] = 
     '''
+    
     def checkTileCollision(self,l,r): 
         maplocY = [math.floor((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space for Y collisions AND for right side X collisons
         maplocX = [round((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tilespace for left side X collisions
@@ -78,7 +80,8 @@ class Vee(pygame.sprite.Sprite):
         coordY = level[maplocY[1]-1][maplocY[0]]
         coordZ = level[maplocZ[1]-1][maplocZ[0]]
 
-        print(math.floor(((self.location[0]+60)/64)-0.5))
+        coordB = level[maplocZ[1]-1][maplocZ[0]]
+
         if coordY > 0:
             self.ycollide = True
             self.rect.y = maplocY[1]*64-190
@@ -90,6 +93,7 @@ class Vee(pygame.sprite.Sprite):
             self.rect.y = maplocZ[1]*64-190
 
         else:
+            
             self.ycollide = False
         #print(self.ycollide)
         #try:
@@ -107,7 +111,8 @@ class Vee(pygame.sprite.Sprite):
             else:
                 self.xcollidel = False
         else:
-            self.xcollidel = False        
+            self.xcollidel = False
+    
 
     def update(self,l, r, j):
         self.checkFloorCollison()
@@ -176,10 +181,11 @@ class Vee(pygame.sprite.Sprite):
 
         self.image=pygame.transform.scale(self.image,(128,128)) #upscale
 
+
         if self.ycollide == True:
             self.jcount = 0
         if self.ycollide == False and j==False:
-            self.yvel -= 8
+            self.yvel -= accel
             #print(self.yvel)
             
         if self.ycollide == True and j==False:
