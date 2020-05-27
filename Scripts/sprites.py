@@ -76,11 +76,21 @@ class Vee(pygame.sprite.Sprite):
         maplocY = [math.floor((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space for Y collisions AND for right side X collisons
         maplocX = [round((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tilespace for left side X collisions
         maplocZ = [math.floor(((self.location[0]+60)/64)-0.5),round((self.location[1]+160)/64)]
+        maplocB = [math.floor(((self.location[0]+60)/64)-0.5),round((self.location[1]+150)/64)] #bottom collisions
+        maplocBX = [round(((self.location[0]+60)/64)),round((self.location[1]+150)/64)]
+        maplocBZ = [math.floor(((self.location[0]+60)/64)),round((self.location[1]+150)/64)]
         coordX = level[maplocX[1]-1][maplocX[0]]
         coordY = level[maplocY[1]-1][maplocY[0]]
         coordZ = level[maplocZ[1]-1][maplocZ[0]]
 
-        coordB = level[maplocZ[1]-1][maplocZ[0]]
+        coordB = 0
+        coordBX = 0
+        coordBZ = 0
+        
+        try:
+            coordB = level[maplocB[1]-3][maplocB[0]]
+        except:
+            pass
 
         if coordY > 0:
             self.ycollide = True
@@ -91,11 +101,16 @@ class Vee(pygame.sprite.Sprite):
         elif coordZ > 0:
             self.ycollide = True
             self.rect.y = maplocZ[1]*64-190
-
         else:
-            
             self.ycollide = False
-        #print(self.ycollide)
+        
+        if coordB > 0:
+            self.ycollidet = True
+            #self.rect.y = maplocB[1]*64
+        else:
+            self.ycollidet = False
+
+        print(self.ycollidet)
         #try:
         if (level[maplocY[1]-2][maplocY[0]+1]) > 0:
             if self.location[0]>=(64*(maplocY[0]+1)-110) and self.location[0]<=(64*(maplocY[0]+1)+110):
@@ -144,10 +159,10 @@ class Vee(pygame.sprite.Sprite):
                 self.image=self.images_walk[self.index]
             self.image=pygame.transform.flip(self.image, True, False)
         
-        if j == True and self.jcount < 2:
+        if j == True and self.jcount < 1 and self.ycollidet == False:
             self.jcount += 1
             self.index += 1
-            self.yvel = 36
+            self.yvel = 32
             if self.index >= len(self.images_idle)-1: #Jump implementation
                 self.index = len(self.images_idle)-1
             self.image=self.images_idle[self.index]
@@ -186,6 +201,8 @@ class Vee(pygame.sprite.Sprite):
             self.jcount = 0
         if self.ycollide == False and j==False:
             self.yvel -= accel
+        if self.ycollidet == True and self.ycollide == False:
+            self.yvel -= accel*2
             #print(self.yvel)
             
         if self.ycollide == True and j==False:
