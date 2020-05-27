@@ -82,11 +82,10 @@ class Vee(pygame.sprite.Sprite):
         coordX = level[maplocX[1]-1][maplocX[0]]
         coordY = level[maplocY[1]-1][maplocY[0]]
         coordZ = level[maplocZ[1]-1][maplocZ[0]]
-
         coordB = 0
         coordBX = 0
         coordBZ = 0
-        
+
         try:
             coordB = level[maplocB[1]-3][maplocB[0]]
         except:
