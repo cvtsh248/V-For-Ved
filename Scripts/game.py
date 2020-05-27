@@ -23,6 +23,8 @@ WINDOW_SIZE = (1280,768) #subject to change
 screen = pygame.display.set_mode(WINDOW_SIZE)
 tile_group = pygame.sprite.Group()
 
+render = pygame.Surface((1280, 768)) #x value can be changed depending on the level
+
 player = Vee()
 odd = Odd()
 
@@ -52,8 +54,13 @@ contact_floor = False
 
 loadLevel(20,12)
 
+camloc = [0,0]
+
+camx = 0
+
 while True: #gameloop
     screen.fill((24,123,120))
+    render.fill((24,123,120))
 
     for event in pygame.event.get():
         
@@ -74,16 +81,32 @@ while True: #gameloop
                 mv_l = False
             if event.key == K_UP:
                 jump = False
+    
+    if player.mv == 'r':
+        camx = -3
+    elif player.mv == 'l':
+        camx = 3
+    elif player.mv == 'c':
+        camx *= 0.9
+        #camx = 0
+    else:
+        camx *= 0.9
+        #camx = 0
+    
+    #camx *= 0.8
+    
+    camloc[0] += camx
 
-    tile_group.draw(screen)
+    tile_group.draw(render)
 
 
     player_group.update(mv_l,mv_r, jump)
-    player_group.draw(screen)
+    player_group.draw(render)
+    screen.blit(render, (camloc[0]-3, 0))
 
 
     text_surface, rect = GAME_FONT.render("Hello, VEE!", (0, 0, 0))
-    screen.blit(text_surface, (40, 250))
+    screen.blit(text_surface, (140+camloc[0]*2, 250))
 
     #npc_group.update()
     #npc_group.draw(screen)

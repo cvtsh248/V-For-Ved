@@ -45,6 +45,8 @@ class Vee(pygame.sprite.Sprite):
         self.rect.x = self.location[0]
         self.rect.y = self.location[1]
 
+        self.mv = ''
+
         self.health = 100
         self.random_phrases = ['Inilaute Amma', 'By meaning?'] #Random mutterings
         self.phrases_spoken = ['Sexy ass, <name> ah','Shut up', 'Shut up, <name>', 'EEEH', 
@@ -57,20 +59,6 @@ class Vee(pygame.sprite.Sprite):
         if self.rect.y < 768-128:
             self.ycollide = False
         self.location[1] = self.rect.y
-    '''
-    def checkTileCollision(self):
-        for y in range(0,12): #tile collision based on tile map
-            for x in range(0,20):
-                coord = level[y][x]
-                if coord > 0:
-                    if self.location[1] >= y*64-128:
-                        self.ycollide = True
-                    if self.location[1] < y*64-128:
-                        self.ycollide = False
-                if coord == 0:
-                    self.ycollide = False
-        self.location[1] = 
-    '''
     
     def checkTileCollision(self,l,r): 
         maplocY = [math.floor((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space for Y collisions AND for right side X collisons
@@ -153,6 +141,7 @@ class Vee(pygame.sprite.Sprite):
             j = False
 
         if l == True and r == False and self.xcollidel == False:
+            self.mv = 'l'
             self.last = 'l'
             self.location[0]-=self.speed
             self.rect.x -= self.speed
@@ -163,6 +152,7 @@ class Vee(pygame.sprite.Sprite):
                 self.image=self.images_walk[self.index]
 
         if r == True and l == False and self.xcollider == False:
+            self.mv = 'r'
             self.last = 'r'
             self.location[0]+= self.speed
             self.rect.x += self.speed
@@ -175,6 +165,7 @@ class Vee(pygame.sprite.Sprite):
         
         if j == True and self.jcount < 1 and self.ycollidet == False:
             self.jcount += 1
+            self.mv = 'c'
             self.index += 1
             self.yvel = 32
             if self.index >= len(self.images_idle)-1: #Jump implementation
@@ -190,6 +181,7 @@ class Vee(pygame.sprite.Sprite):
 
         if r == False and l == False and j == False and self.jcount < 2 and self.ycollide == True and self.xcollider == False and self.xcollidel == False:
             self.index += 1
+            self.mv = 'c'
             if self.index >= len(self.images_idle)-1: #idle cycle
                 self.index = 0
             if self.last == 'r':
@@ -200,6 +192,7 @@ class Vee(pygame.sprite.Sprite):
         
         if self.xcollidel == True or self.xcollider == True:
             self.index += 1
+            self.mv = 'c'
             if self.index >= len(self.images_idle)-1: #idle cycle
                 self.index = 0
             if self.last == 'r':
