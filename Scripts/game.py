@@ -26,15 +26,16 @@ tile_group = pygame.sprite.Group()
 player = Vee()
 odd = Odd()
 
-for y in range(0,12): #render tiles based on tile map
-    for x in range(0,20):
-        coord = level[y][x]
-        if coord == 1:
-            tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONE0.png',1,1))
-        if coord == 2:
-            tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONE1.png',1,1))
-        if coord == 3:
-            tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONETOP.png',1,1))
+def loadLevel(X, Y):
+    for y in range(0,Y): #render tiles based on tile map
+        for x in range(0,X):
+            coord = level[y][x]
+            if coord == 1:
+                tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONE0.png',1,1))
+            if coord == 2:
+                tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONE1.png',1,1))
+            if coord == 3:
+                tile_group.add(Tile(x*64,y*64,'Assets/Tiles/Mossy_Stone/MOSSY_STONETOP.png',1,1))
 
 GAME_FONT = Font('Fonts/manaspace/manaspc.ttf', 24)
 
@@ -48,6 +49,8 @@ mv_r = False
 mv_l = False
 jump = False
 contact_floor = False
+
+loadLevel(20,12)
 
 while True: #gameloop
     screen.fill((24,123,120))

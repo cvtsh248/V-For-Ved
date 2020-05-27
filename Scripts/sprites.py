@@ -125,7 +125,6 @@ class Vee(pygame.sprite.Sprite):
         else:
             self.ycollidet = False
 
-        print(self.ycollidet)
         #try:
         if (level[maplocY[1]-2][maplocY[0]+1]) > 0:
             if self.location[0]>=(64*(maplocY[0]+1)-110) and self.location[0]<=(64*(maplocY[0]+1)+110):
