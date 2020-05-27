@@ -76,18 +76,31 @@ class Vee(pygame.sprite.Sprite):
         maplocY = [math.floor((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tile space for Y collisions AND for right side X collisons
         maplocX = [round((self.location[0]+60)/64),round((self.location[1]+160)/64)] #mapping location to tilespace for left side X collisions
         maplocZ = [math.floor(((self.location[0]+60)/64)-0.5),round((self.location[1]+160)/64)]
+
         maplocB = [math.floor(((self.location[0]+60)/64)-0.5),round((self.location[1]+150)/64)] #bottom collisions
         maplocBX = [round(((self.location[0]+60)/64)),round((self.location[1]+150)/64)]
         maplocBZ = [math.floor(((self.location[0]+60)/64)),round((self.location[1]+150)/64)]
+
         coordX = level[maplocX[1]-1][maplocX[0]]
         coordY = level[maplocY[1]-1][maplocY[0]]
         coordZ = level[maplocZ[1]-1][maplocZ[0]]
+
         coordB = 0
         coordBX = 0
         coordBZ = 0
 
         try:
             coordB = level[maplocB[1]-3][maplocB[0]]
+        except:
+            pass
+
+        try:
+            coordBX = level[maplocBX[1]-3][maplocBX[0]]
+        except:
+            pass
+
+        try:
+            coordBZ = level[maplocBZ[1]-3][maplocBZ[0]]
         except:
             pass
 
@@ -105,7 +118,10 @@ class Vee(pygame.sprite.Sprite):
         
         if coordB > 0:
             self.ycollidet = True
-            #self.rect.y = maplocB[1]*64
+        #elif coordBX > 0:
+            #self.ycollidet = True
+        elif coordBZ > 0:
+            self.ycollidet = True
         else:
             self.ycollidet = False
 
