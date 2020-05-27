@@ -58,6 +58,8 @@ camloc = [0,0]
 
 camx = 0
 
+camy = 0
+
 while True: #gameloop
     screen.fill((24,123,120))
     render.fill((24,123,120))
@@ -83,30 +85,31 @@ while True: #gameloop
                 jump = False
     
     if player.mv == 'r':
-        camx = -3
+        camx = -3.8
     elif player.mv == 'l':
-        camx = 3
+        camx = 3.8
     elif player.mv == 'c':
         camx *= 0.9
         #camx = 0
     else:
         camx *= 0.9
         #camx = 0
-    
+    camy = (player.yvel/10)
     #camx *= 0.8
     
     camloc[0] += camx
+    camloc[1] += camy
 
     tile_group.draw(render)
 
 
     player_group.update(mv_l,mv_r, jump)
     player_group.draw(render)
-    screen.blit(render, (camloc[0]-3, 0))
+    screen.blit(render, (camloc[0]-3, camloc[1]+50))
 
 
     text_surface, rect = GAME_FONT.render("Hello, VEE!", (0, 0, 0))
-    screen.blit(text_surface, (140+camloc[0]*2, 250))
+    screen.blit(text_surface, (140+camloc[0]*2, 250+camloc[1]*2))
 
     #npc_group.update()
     #npc_group.draw(screen)
