@@ -77,6 +77,8 @@ class Vee(pygame.sprite.Sprite):
         coordBX = 0
         coordBZ = 0
 
+        #print(level[maplocY[1]-2][maplocY[0]+1])
+
         try:
             coordB = level[maplocB[1]-3][maplocB[0]]
         except:

@@ -23,7 +23,9 @@ WINDOW_SIZE = (1280,768) #subject to change
 screen = pygame.display.set_mode(WINDOW_SIZE)
 tile_group = pygame.sprite.Group()
 
-render = pygame.Surface((1280, 768)) #x value can be changed depending on the level
+#render = pygame.Surface((1280, 768)) #x value can be changed depending on the level
+
+render = pygame.Surface((1664, 768))
 
 player = Vee()
 odd = Odd()
@@ -52,7 +54,9 @@ mv_l = False
 jump = False
 contact_floor = False
 
-loadLevel(20,12)
+#loadLevel(20,12)
+
+loadLevel(26,12)
 
 camloc = [0,0]
 
