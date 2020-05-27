@@ -25,7 +25,7 @@ tile_group = pygame.sprite.Group()
 
 #render = pygame.Surface((1280, 768)) #x value can be changed depending on the level
 
-render = pygame.Surface((1664, 768))
+render = pygame.Surface((10000, 10000))
 
 player = Vee()
 odd = Odd()
@@ -56,7 +56,7 @@ contact_floor = False
 
 #loadLevel(20,12)
 
-loadLevel(26,12)
+loadLevel(26,13)
 
 camloc = [0,0]
 
@@ -109,7 +109,7 @@ while True: #gameloop
 
     player_group.update(mv_l,mv_r, jump)
     player_group.draw(render)
-    screen.blit(render, (camloc[0]-3, camloc[1]+50))
+    screen.blit(render, (camloc[0]-3, camloc[1]*2.5+120))
 
 
     text_surface, rect = GAME_FONT.render("Hello, VEE!", (0, 0, 0))
