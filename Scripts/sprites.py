@@ -215,7 +215,7 @@ class Vee(pygame.sprite.Sprite):
                 if self.index >= len(self.images_walk)-1: #walk cycle
                     self.index = 0
                 self.image=self.images_walk[self.index]
-            if self.mv == 'c':
+            if self.mv == 'c' or (l == False and r == False):
                 self.index += 1
                 if self.index >= len(self.images_idle)-1: #idle cycle
                     self.index = 0
