@@ -202,7 +202,29 @@ class Vee(pygame.sprite.Sprite):
                 self.image=pygame.transform.flip(self.image, True, False)
             else:
                 self.image=self.images_idle[self.index]
-
+    
+        if self.ycollidet == True and j == True:
+            if self.mv == 'r':
+                self.index += 1
+                if self.index >= len(self.images_walk)-1: #walk cycle
+                    self.index = 0
+                self.image=self.images_walk[self.index]
+            self.image=pygame.transform.flip(self.image, True, False)      
+            if self.mv == 'l':
+                self.index += 1
+                if self.index >= len(self.images_walk)-1: #walk cycle
+                    self.index = 0
+                self.image=self.images_walk[self.index]
+            if self.mv == 'c':
+                self.index += 1
+                if self.index >= len(self.images_idle)-1: #idle cycle
+                    self.index = 0
+                if self.last == 'r':
+                    self.image=self.images_idle[self.index]
+                    self.image=pygame.transform.flip(self.image, True, False)
+                else:
+                    self.image=self.images_idle[self.index]
+            
         self.image=pygame.transform.scale(self.image,(128,128)) #upscale
 
 
