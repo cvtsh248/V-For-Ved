@@ -108,8 +108,7 @@ class Vee(pygame.sprite.Sprite):
         
         if coordB > 0:
             self.ycollidet = True
-        #elif coordBX > 0:
-            #self.ycollidet = True
+
         elif coordBZ > 0:
             self.ycollidet = True
         else:
@@ -131,11 +130,13 @@ class Vee(pygame.sprite.Sprite):
                 self.xcollidel = False
         else:
             self.xcollidel = False
+        
+        print(level[math.floor((self.location[1]+160)/64)+1][maplocY[0]])
     
 
     def update(self,l, r, j):
         #self.checkFloorCollison()
-        self.checkTileCollision()
+        
 
         #print(self.location)
 
@@ -241,7 +242,7 @@ class Vee(pygame.sprite.Sprite):
         #print(self.rect.y)
         self.rect.y -= self.yvel
         self.location[1] = self.rect.y
-        
+        self.checkTileCollision()
 
     def mutter(self):
         phrase = self.random_phrases[random.randint(0,len(self.random_phrases)-1)]
