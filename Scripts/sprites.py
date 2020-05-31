@@ -129,10 +129,7 @@ class Vee(pygame.sprite.Sprite):
             else:
                 self.xcollidel = False
         else:
-            self.xcollidel = False
-        
-        print(level[math.floor((self.location[1]+160)/64)+1][maplocY[0]])
-    
+            self.xcollidel = False    
 
     def update(self,l, r, j):
         #self.checkFloorCollison()
